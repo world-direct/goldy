@@ -403,7 +403,7 @@ static int session_init(const global_context *gc,
    * the initial recvfrom() call on the listening fd. Here we copy the content
    * of that packet into the SSL incoming data buffer so it'll be consumed on
    * the next call to mbedtls_ssl_fetch_input(). */
-  if (first_packet_len<MBEDTLS_SSL_BUFFER_LEN) {
+  if (first_packet_len<MBEDTLS_SSL_MAX_CONTENT_LEN) {
     memcpy(sc->ssl.in_hdr, first_packet, first_packet_len);
     sc->ssl.in_left = first_packet_len;
   }
